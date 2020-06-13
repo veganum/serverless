@@ -8,8 +8,12 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-app.get("*", (req, res) => {
-  res.send("Hola mundo");
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  res.send("hola soy la raiz");
 });
+
+app.use("/plates", router);
 
 module.exports = app;
