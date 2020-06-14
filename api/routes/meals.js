@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("hola soy plates");
+  res.send("hola soy meals");
 });
 
 router.get("/:id", (req, res) => {
