@@ -1,26 +1,39 @@
 const express = require("express");
-
+const Orders = require("../models/Orders");
 const router = express.Router();
+
+/*
+Buscar todos
+Exec es para ejecutar la query
+Then es para enviar la promesa
+Status para indicar el codigo de la peticion
+*/
 
 //Listar
 router.get("/", (req, res) => {
-  res.send("hola soy orders");
+  Orders.find()
+    .exec()
+    .then((x) => res.status(200).send(x));
 });
-//Buscar un elemento en particular
+//Buscar un elemento particular
 router.get("/:id", (req, res) => {
-  res.send(req.params.id);
+  Orders.findById(req.params.id)
+    .exec()
+    .then((x) => res.status(200).send(x));
 });
 //Crear
 router.post("/", (req, res) => {
-  res.send("soy post");
+  Orders.create(req.body).then((x) => res.status(201).send(x));
 });
 //Remplazar
 router.put("/:id", (req, res) => {
-  res.send("soy put");
+  Orders.findByIdAndUpdate(req.params.id, req.body).then(() =>
+    res.sendStatus(204)
+  );
 });
 //Borrar
 router.delete("/:id", (req, res) => {
-  res.send("soy delete");
+  Orders.findOneAndDelete(req.params.id).exec.then(() => res.sendStatus(204));
 });
 
 module.exports = router;
