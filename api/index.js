@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const plates = require("./routes/plates");
+const orders = require("./routes/orders");
 const app = express();
 
 //Variable de entorno
@@ -8,12 +10,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.send("hola soy la raiz");
-});
-
-app.use("/plates", router);
+app.use("/api/plates", plates);
+app.use("/api/orders", orders);
 
 module.exports = app;
