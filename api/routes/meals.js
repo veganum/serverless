@@ -34,7 +34,9 @@ router.put("/:id", (req, res) => {
 });
 //Borrar
 router.delete("/:id", (req, res) => {
-  Meals.findOneAndDelete(req.params.id).exec.then(() => res.sendStatus(204));
+  Meals.findOneAndDelete(req.params.id)
+    .exec()
+    .then(() => res.sendStatus(204));
 });
 
 module.exports = router;
